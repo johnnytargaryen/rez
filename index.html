@@ -250,7 +250,7 @@
     <span class="title-tag">Sales Leader</span>
   </div>
   <div class="contact-line">
-    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f151017110c171a0d1a0d4e4d3f18121e1613511c1012">[email&#160;protected]</a> &nbsp;·&nbsp; 401-749-9012 &nbsp;·&nbsp;
+    johnsherer12@gmail.com &nbsp;·&nbsp; 401-749-9012 &nbsp;·&nbsp;
     <a href="https://linkedin.com/in/johnsherer" target="_blank">linkedin.com/in/johnsherer</a>
   </div>
 
@@ -280,7 +280,7 @@
 
 <!-- LATTICE -->
 <div class="company open" id="lattice">
-  <div class="company-header" onclick="toggle('lattice')">
+  <div class="company-header" data-id="lattice">
     <div class="company-left">
       <span class="company-name">Lattice</span>
       <span class="company-meta">2020 – 2023 · HR Performance Management SaaS</span>
@@ -335,7 +335,7 @@
 
 <!-- APPCUES -->
 <div class="company" id="appcues">
-  <div class="company-header" onclick="toggle('appcues')">
+  <div class="company-header" data-id="appcues">
     <div class="company-left">
       <span class="company-name">Appcues</span>
       <span class="company-meta">2014 – 2019 · Product Adoption SaaS · Employee #1</span>
@@ -396,7 +396,7 @@
 
 <!-- HUBSPOT -->
 <div class="company" id="hubspot">
-  <div class="company-header" onclick="toggle('hubspot')">
+  <div class="company-header" data-id="hubspot">
     <div class="company-left">
       <span class="company-name">HubSpot</span>
       <span class="company-meta">2011 – 2014 · Marketing and Sales CRM</span>
@@ -432,7 +432,7 @@
 
 <!-- DIFFERENT HEALTH -->
 <div class="company" id="dh">
-  <div class="company-header" onclick="toggle('dh')">
+  <div class="company-header" data-id="dh">
     <div class="company-left">
       <span class="company-name">Different Health</span>
       <span class="company-meta">2024 – 2025 · Co-Founder · Performance Medicine</span>
@@ -470,4 +470,26 @@
 
     <p class="next-cta">
       Open to VP of Sales or CRO roles. Stage: Series B through pre-IPO.<br>
-      Contact: <a href="/cdn-cgi/l/email-protection#7c161314120f14190e190e4d4e3c1b111d1510521f1311"><span class="__cf_email__" data-cfemail="ed878285839e85889f889fdcdfad8a808c8481c38e8280">[email&#1
+      Contact: johnsherer12@gmail.com &nbsp;·&nbsp; 401-749-9012
+    </p>
+  </div>
+</div>
+
+<footer>
+  Last updated April 2026
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.company-header').forEach(function(header) {
+      header.addEventListener('click', function() {
+        var id = this.getAttribute('data-id');
+        var el = document.getElementById(id);
+        if (el) el.classList.toggle('open');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
