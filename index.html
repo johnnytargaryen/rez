@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Sherer - Sales Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f8f6;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #e0ddd8;
+    --hover-bg: #f0ede8;
+    --tag-bg: #ede9e3;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 24px 120px;
+  }
+
+  .header { margin-bottom: 56px; }
+
+  .header-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+
+  h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.3px; }
+
+  .title-tag { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .contact-line {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .contact-line a { color: var(--muted); text-decoration: none; }
+  .contact-line a:hover { color: var(--fg); }
+
+  .summary {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--fg);
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+
+  .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+
+  .stat {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--tag-bg);
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: var(--fg);
+  }
+
+  .logos-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    align-items: center;
+  }
+
+  .logos-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .logo-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--tag-bg);
+    color: var(--fg);
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  .role-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0 0; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .company { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
+
+  .company-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .company-header:hover { background: var(--hover-bg); }
+
+  .company-left { display: flex; align-items: baseline; gap: 14px; }
+
+  .company-name { font-size: 16px; font-weight: 600; }
+
+  .company-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .company-right { display: flex; align-items: center; gap: 16px; }
+
+  .company-arrlabel { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+
+  .company.open .chevron { transform: rotate(180deg); }
+
+  .company-body { display: none; padding: 0 20px 24px; border-top: 1px solid var(--border); }
+
+  .company.open .company-body { display: block; }
+
+  .role-block { margin-top: 20px; }
+
+  .role-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+
+  .role-dates { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+
+  .role-desc { font-size: 14px; color: #333; line-height: 1.65; margin-bottom: 14px; max-width: 620px; }
+
+  .wins { margin-top: 14px; }
+
+  .wins-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .win-item {
+    display: flex;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 6px;
+    color: #222;
+  }
+
+  .win-item::before {
+    content: "→";
+    font-family: var(--mono);
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .built-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+  .built-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .built-item {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #333;
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .built-item::before { content: "·"; position: absolute; left: 0; color: var(--muted); }
+
+  .context-note {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--tag-bg);
+    border-radius: 4px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .next-section { margin-top: 48px; }
+
+  .next-box { border: 1px solid var(--border); border-radius: 6px; padding: 24px; }
+
+  .next-box h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+
+  .next-item {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .next-item::before { content: "·"; position: absolute; left: 0; color: var(--muted); }
+
+  .next-cta { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+  .next-cta a { color: var(--fg); font-weight: 500; }
+
+  footer { margin-top: 64px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  @media (max-width: 540px) {
+    body { padding: 40px 16px 80px; }
+    .company-left { flex-direction: column; gap: 2px; }
+    .stats-row { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <h1>John Sherer</h1>
+    <span class="title-tag">Sales Leader</span>
+  </div>
+  <div class="contact-line">
+    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f151017110c171a0d1a0d4e4d3f18121e1613511c1012">[email&#160;protected]</a> &nbsp;·&nbsp; 401-749-9012 &nbsp;·&nbsp;
+    <a href="https://linkedin.com/in/johnsherer" target="_blank">linkedin.com/in/johnsherer</a>
+  </div>
+
+  <p class="summary">
+    I've built sales organizations from zero twice and scaled one from $19M to $120M. My career runs from first employee to VP of Sales across three companies, spanning pre-revenue through IPO. I'm at my best when I inherit a strong inbound motion and build the outbound engine on top of it.
+  </p>
+
+  <div class="stats-row">
+    <span class="stat">$0 to $150M+ ARR</span>
+    <span class="stat">Pre-revenue through IPO</span>
+    <span class="stat">Teams of 1 to 80+</span>
+    <span class="stat">$10K avg deal size</span>
+    <span class="stat">PLG · Inbound · Outbound · Channel</span>
+  </div>
+
+  <div class="logos-row">
+    <span class="logos-label">Major logos</span>
+    <span class="logo-tag">Goldman Sachs</span>
+    <span class="logo-tag">Johnson &amp; Johnson</span>
+    <span class="logo-tag">IBM</span>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-label">Experience</div>
+
+<!-- LATTICE -->
+<div class="company open" id="lattice">
+  <div class="company-header" onclick="toggle('lattice')">
+    <div class="company-left">
+      <span class="company-name">Lattice</span>
+      <span class="company-meta">2020 – 2023 · HR Performance Management SaaS</span>
+    </div>
+    <div class="company-right">
+      <span class="company-arrlabel">$19M → $120M ARR</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="company-body">
+
+    <div class="role-block">
+      <div class="role-title">VP of Sales</div>
+      <div class="role-dates">Feb 2021 – Apr 2023</div>
+      <p class="role-desc">
+        Ran SMB, Mid-Market, and Enterprise. At peak, responsible for 90% of total company new revenue. Started with 2 leaders and 14 ICs. Left with 16 leaders and 65 ICs.
+      </p>
+
+      <div class="wins">
+        <div class="wins-label">Results</div>
+        <div class="win-item">Hit or exceeded targets every quarter except one. Never missed forecast by more than 10%.</div>
+        <div class="win-item">Shifted from 91% inbound to 60% outbound / 40% inbound by ~$100M ARR.</div>
+        <div class="win-item">One voluntary AE attrition across three years of tenure.</div>
+        <div class="win-item">Named Best Sales Team in the Country, Stevie Awards, twice.</div>
+        <div class="win-item">100% of hiring targets hit every year.</div>
+      </div>
+
+      <div class="built-section">
+        <div class="built-label">What I Built</div>
+        <div class="built-item"><strong>Sales math framework.</strong> Tiered quota attainment model across 5 AE segments and 2 EMEA segments. Connected daily activity to monthly quota. Used in onboarding, coaching, and accountability reviews.</div>
+        <div class="built-item"><strong>AE hiring framework.</strong> Used Bryq psychometric data from top performers to identify the traits that predicted success: authenticity paired with assertiveness. Broke coachability into two distinct competencies: receiving feedback gracefully vs. actually applying it. Changed how we hired at every stage.</div>
+        <div class="built-item"><strong>Re-segmentation.</strong> Data-backed analysis of win rates, sales cycle length, meeting frequency, and stakeholder seniority across all closed-won deals. Recommended and implemented a three-segment model with employee count thresholds at 250 and 1,000.</div>
+        <div class="built-item"><strong>Pipeline review process.</strong> Diagnosed that Commercial AEs were winning less than 25% of starting late-stage pipeline every month. Built a standardized review process using Gong boards, custom deal warnings, and a W1/W3 cadence. Piloted with one pod and saw 2 to 3x higher win rate improvement than non-pilot pods.</div>
+        <div class="built-item"><strong>Forecasting process.</strong> Built the forecasting cadence and methodology that held the team to within 10% of target every quarter.</div>
+        <div class="built-item"><strong>Career pathing framework.</strong> Defined promotion criteria across Commercial, Corporate, and Strategic AE levels, including performance thresholds, role mastery evaluation, and segment transition requirements.</div>
+        <div class="built-item"><strong>Command of the Message.</strong> Rolled out the messaging framework across the full sales org.</div>
+      </div>
+    </div>
+
+    <hr class="role-divider">
+
+    <div class="role-block">
+      <div class="role-title">Sales Director</div>
+      <div class="role-dates">Jan 2020 – Feb 2021</div>
+      <p class="role-desc">
+        Joined to run SMB and the BDR team. Improved outbound output, improved conversion across the board, leveled up the management team, and hit all targets in year one.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- APPCUES -->
+<div class="company" id="appcues">
+  <div class="company-header" onclick="toggle('appcues')">
+    <div class="company-left">
+      <span class="company-name">Appcues</span>
+      <span class="company-meta">2014 – 2019 · Product Adoption SaaS · Employee #1</span>
+    </div>
+    <div class="company-right">
+      <span class="company-arrlabel">$0 → $10M ARR</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="company-body">
+
+    <div class="role-block">
+      <div class="role-title">VP of Sales</div>
+      <div class="role-dates">Nov 2017 – Oct 2019</div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-title">Sales Director</div>
+      <div class="role-dates">Nov 2015 – Oct 2017</div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-title">Head of Sales and Customer Support</div>
+      <div class="role-dates">Nov 2014 – Oct 2015</div>
+      <p class="role-desc">
+        Joined pre-funding, pre-product, $2K in MRR as the first employee. Built everything from zero: CRM, deal desk, MSA and order forms, comp plans, career pathing, onboarding programs, outbound motion. Hired the first BDRs, taught them to sell, promoted them to AEs.
+      </p>
+    </div>
+
+    <div class="wins">
+      <div class="wins-label">Results</div>
+      <div class="win-item">ASP growth every year: +32% (2016), +27% (2017), +43% (2018), +48% (2019).</div>
+      <div class="win-item">MQL to opportunity conversion: 24% to 54% over 2.5 years.</div>
+      <div class="win-item">Annual contracts: 20% to 65% in two months.</div>
+      <div class="win-item">$2.24M in expansion revenue, 25% of total ARR.</div>
+      <div class="win-item">2018 AEs averaged 118% to quota.</div>
+      <div class="win-item">3.5% all-time regrettable attrition.</div>
+      <div class="win-item">~1,200 logos including IBM ($390K), J&amp;J, Atlassian, LogMeIn, Brex.</div>
+      <div class="win-item">Outbound program: launched with 2 BDRs in 2018, grew to 7, generated $4.6M in pipeline.</div>
+    </div>
+
+    <div class="built-section">
+      <div class="built-label">What I Built</div>
+      <div class="built-item">Full sales infrastructure from zero: CRM, deal desk, MSA and order forms, comp design, weekly and monthly management cadence.</div>
+      <div class="built-item">Product-led sales motion using real-time usage alerts to trigger AE outreach. 40% close rate, under 5% discount rate.</div>
+      <div class="built-item">Low-touch motion for self-serve. Doubled free-to-paid conversion in three months.</div>
+      <div class="built-item">Outbound program from scratch: 2 BDRs to 7, generating $4.6M in pipeline.</div>
+      <div class="built-item">GTM partnerships with Segment, Amplitude, Mixpanel, and Heap for mutual referrals.</div>
+      <div class="built-item">Sales OKR strategy, led execution for 7 consecutive quarters.</div>
+    </div>
+
+    <div class="context-note">
+      Sold to product and engineering teams at B2B SaaS companies. Original thesis was product marketing managers as buyer. Identified early that product teams at companies with high user expansion value were the real buyer and redirected the entire motion accordingly.
+    </div>
+
+  </div>
+</div>
+
+<!-- HUBSPOT -->
+<div class="company" id="hubspot">
+  <div class="company-header" onclick="toggle('hubspot')">
+    <div class="company-left">
+      <span class="company-name">HubSpot</span>
+      <span class="company-meta">2011 – 2014 · Marketing and Sales CRM</span>
+    </div>
+    <div class="company-right">
+      <span class="company-arrlabel">$40M → $150M ARR · IPO</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="company-body">
+
+    <div class="role-block">
+      <div class="role-title">Account Executive to Senior Account Executive</div>
+      <div class="role-dates">Dec 2011 – Nov 2014</div>
+      <p class="role-desc">
+        Individual contributor across three years. Worked direct sales, channel and partner, and direct again. Top 20% performer. Present through IPO. Left to go build something from scratch.
+      </p>
+    </div>
+
+    <div class="wins">
+      <div class="wins-label">Results</div>
+      <div class="win-item">Top 5% AE on direct and channel mid-market teams.</div>
+      <div class="win-item">Operated across inbound, direct, and channel/partner motions.</div>
+      <div class="win-item">Present at IPO.</div>
+    </div>
+
+    <div class="context-note">
+      Where I learned how a great sales org gets built. Paid more attention to comp plan design and territory logic than most reps. Left on the advice of Mark Roberge: find the earliest-stage company you can and hold on for dear life.
+    </div>
+
+  </div>
+</div>
+
+<!-- DIFFERENT HEALTH -->
+<div class="company" id="dh">
+  <div class="company-header" onclick="toggle('dh')">
+    <div class="company-left">
+      <span class="company-name">Different Health</span>
+      <span class="company-meta">2024 – 2025 · Co-Founder · Performance Medicine</span>
+    </div>
+    <div class="company-right">
+      <span class="company-arrlabel">Pre-seed</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="company-body">
+
+    <div class="role-block">
+      <div class="role-title">Co-Founder</div>
+      <div class="role-dates">Jul 2024 – Feb 2025</div>
+      <p class="role-desc">
+        Built a company to bring performance medicine into corporations so executives could perform at a higher level. Rolled out the program at Goldman Sachs and generated ~$250K in revenue from smaller businesses and consumers. Determined it was not a venture-scale business. Co-founder is pivoting to B2C. Returning to B2B.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="next-section">
+  <div class="section-label">What I'm Looking For</div>
+
+  <div class="next-box">
+    <h3>The right opportunity looks like this</h3>
+    <div class="next-item">A company with proven inbound at scale, $20M+ ARR, where I can build the outbound engine on top of it.</div>
+    <div class="next-item">A sales leader I genuinely admire and can learn from. This is non-negotiable.</div>
+    <div class="next-item">100%+ YoY growth, 110%+ NRR, strong investors, and recent exec hires who are legitimately impressive.</div>
+    <div class="next-item">Enough autonomy to make bets. Enough resources to staff them properly.</div>
+    <div class="next-item">A team that's good enough to make me a little nervous.</div>
+
+    <p class="next-cta">
+      Open to VP of Sales or CRO roles. Stage: Series B through pre-IPO.<br>
+      Contact: <a href="/cdn-cgi/l/email-protection#7c161314120f14190e190e4d4e3c1b111d1510521f1311"><span class="__cf_email__" data-cfemail="ed878285839e85889f889fdcdfad8a808c8481c38e8280">[email&#1
